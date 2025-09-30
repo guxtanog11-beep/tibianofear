@@ -8,16 +8,16 @@ function PartyshareGuild({ planilha }) {
       p.Name !== player.Name &&
       p.Vocação !== player.Vocação &&
       p.Level >= min && p.Level <= max
-    ).map(p => p.Name);
+    ).map(p => `${p.Name} (${p.Level})`);
     return { min, max, compat };
   }
 
   if (!planilha.length) return null;
   return (
-    <section className="section">
+    <section className="section partyshare-section">
       <h2 className="section-title">Partyshare</h2>
       <div className="table-wrapper">
-        <table className="styled-table">
+        <table className="styled-table partyshare-table">
           <thead>
             <tr>
               <th>Nome</th>
@@ -147,10 +147,10 @@ export default function Home() {
       </footer>
       <style jsx global>{`
         body {
-          background: #f7f8fa;
+          background: #18181b;
           font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
           margin: 0;
-          color: #222;
+          color: #f2f2f2;
         }
         .container {
           max-width: 1100px;
@@ -158,30 +158,38 @@ export default function Home() {
           padding: 32px 16px 0 16px;
         }
         .header {
-          background: #fff;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          background: #1a1a1d;
+          box-shadow: 0 2px 8px rgba(255,0,0,0.08);
           padding: 24px 0 16px 0;
           margin-bottom: 32px;
           border-radius: 12px;
+          border-bottom: 2px solid #c70039;
         }
         .site-title {
           text-align: center;
           font-size: 2.2rem;
           font-weight: 700;
-          color: #2d5a8d;
+          color: #c70039;
           margin: 0;
+          letter-spacing: 2px;
+          text-shadow: 0 2px 8px #c7003944;
         }
         .section {
-          background: #fff;
+          background: #232326;
           border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          box-shadow: 0 2px 8px rgba(255,0,0,0.04);
           padding: 24px;
           margin-bottom: 32px;
         }
+        .partyshare-section {
+          border: 2px solid #c70039;
+        }
         .section-title {
           font-size: 1.4rem;
-          color: #2d5a8d;
+          color: #c70039;
           margin-bottom: 18px;
+          font-weight: 600;
+          letter-spacing: 1px;
         }
         .table-wrapper {
           overflow-x: auto;
@@ -190,25 +198,28 @@ export default function Home() {
           width: 100%;
           border-collapse: collapse;
           font-size: 1rem;
-          background: #fafbfc;
+          background: #18181b;
           border-radius: 8px;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+          box-shadow: 0 1px 4px rgba(255,0,0,0.03);
         }
         .styled-table th, .styled-table td {
           padding: 10px 8px;
-          border: 1px solid #e3e6ee;
+          border: 1px solid #c70039;
           text-align: left;
         }
         .styled-table th {
-          background: #e3e6ee;
-          color: #2d5a8d;
+          background: #c70039;
+          color: #fff;
           font-weight: 600;
         }
         .styled-table tr:nth-child(even) {
-          background: #f7f8fa;
+          background: #232326;
+        }
+        .partyshare-table th, .partyshare-table td {
+          border: 1px solid #c70039;
         }
         .btn-link {
-          background: #2d5a8d;
+          background: #c70039;
           color: #fff;
           padding: 4px 12px;
           border-radius: 6px;
@@ -217,18 +228,18 @@ export default function Home() {
           transition: background 0.2s;
         }
         .btn-link:hover {
-          background: #17406b;
+          background: #900026;
         }
         .footer {
           text-align: center;
           margin-top: 40px;
-          color: #888;
+          color: #c70039;
           font-size: 1rem;
           padding-bottom: 24px;
         }
         .loading {
           text-align: center;
-          color: #2d5a8d;
+          color: #c70039;
           font-size: 1.1rem;
           margin: 32px 0;
         }
