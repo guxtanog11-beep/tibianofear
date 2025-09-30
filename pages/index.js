@@ -131,130 +131,32 @@ function CharBazaarElysian() {
 }
 
 export default function Home() {
-  const [planilha, setPlanilha] = useState([]);
   return (
-    <div className="container">
-      <header className="header">
-        <h1 className="site-title">Tibianofear Guild & Char Bazaar Elysian</h1>
-      </header>
-      <main>
-        <CharBazaarElysian />
-        <PlanilhaGuild setPlanilha={setPlanilha} planilha={planilha} />
-        <PartyshareGuild planilha={planilha} />
-      </main>
-      <footer className="footer">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex flex-col items-center p-6">
+      <h1 className="text-3xl font-bold mb-6 text-pink-500 drop-shadow-lg">
+        Tibianofear Guild & Char Bazaar Elysian
+      </h1>
+      <div className="grid md:grid-cols-2 gap-8 w-full max-w-6xl">
+        {/* Rubinot */}
+        <div className="bg-gray-800 rounded-2xl shadow-xl p-4">
+          <h2 className="text-xl font-semibold mb-2">Char Bazaar (Rubinot)</h2>
+          <iframe 
+            src="https://rubinot.com.br"
+            className="w-full h-[600px] rounded-lg"
+          />
+        </div>
+        {/* Planilha */}
+        <div className="bg-gray-800 rounded-2xl shadow-xl p-4">
+          <h2 className="text-xl font-semibold mb-2">Planilha da Guild</h2>
+          <iframe 
+            src="LINK_DA_SUA_PLANILHA"
+            className="w-full h-[600px] rounded-lg"
+          />
+        </div>
+      </div>
+      <footer className="mt-10 text-sm text-gray-400">
         Powered by Rubinot Tools & Google Sheets
       </footer>
-      <style jsx global>{`
-        body {
-          background: #18181b;
-          font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-          margin: 0;
-          color: #f2f2f2;
-        }
-        .container {
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 32px 16px 0 16px;
-        }
-        .header {
-          background: #1a1a1d;
-          box-shadow: 0 2px 8px rgba(255,0,0,0.08);
-          padding: 24px 0 16px 0;
-          margin-bottom: 32px;
-          border-radius: 12px;
-          border-bottom: 2px solid #c70039;
-        }
-        .site-title {
-          text-align: center;
-          font-size: 2.2rem;
-          font-weight: 700;
-          color: #c70039;
-          margin: 0;
-          letter-spacing: 2px;
-          text-shadow: 0 2px 8px #c7003944;
-        }
-        .section {
-          background: #232326;
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(255,0,0,0.04);
-          padding: 24px;
-          margin-bottom: 32px;
-        }
-        .partyshare-section {
-          border: 2px solid #c70039;
-        }
-        .section-title {
-          font-size: 1.4rem;
-          color: #c70039;
-          margin-bottom: 18px;
-          font-weight: 600;
-          letter-spacing: 1px;
-        }
-        .table-wrapper {
-          overflow-x: auto;
-        }
-        .styled-table {
-          width: 100%;
-          border-collapse: collapse;
-          font-size: 1rem;
-          background: #18181b;
-          border-radius: 8px;
-          box-shadow: 0 1px 4px rgba(255,0,0,0.03);
-        }
-        .styled-table th, .styled-table td {
-          padding: 10px 8px;
-          border: 1px solid #c70039;
-          text-align: left;
-        }
-        .styled-table th {
-          background: #c70039;
-          color: #fff;
-          font-weight: 600;
-        }
-        .styled-table tr:nth-child(even) {
-          background: #232326;
-        }
-        .partyshare-table th, .partyshare-table td {
-          border: 1px solid #c70039;
-        }
-        .btn-link {
-          background: #c70039;
-          color: #fff;
-          padding: 4px 12px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: 500;
-          transition: background 0.2s;
-        }
-        .btn-link:hover {
-          background: #900026;
-        }
-        .footer {
-          text-align: center;
-          margin-top: 40px;
-          color: #c70039;
-          font-size: 1rem;
-          padding-bottom: 24px;
-        }
-        .loading {
-          text-align: center;
-          color: #c70039;
-          font-size: 1.1rem;
-          margin: 32px 0;
-        }
-        @media (max-width: 700px) {
-          .container {
-            padding: 8px 2px 0 2px;
-          }
-          .section {
-            padding: 12px;
-          }
-          .site-title {
-            font-size: 1.3rem;
-          }
-        }
-      `}</style>
     </div>
-  );
+  )
 }
