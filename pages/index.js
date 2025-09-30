@@ -1,115 +1,157 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useEffect, useState } from 'react';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+function PlanilhaGuild() {
+  const [planilha, setPlanilha] = useState([]);
+  useEffect(() => {
+    fetch('/api/planilha')
+      .then(res => res.json())
+      .then(json => setPlanilha(json))
+      .catch(err => setPlanilha([]));
+  }, []);
+  if (!planilha.length) return <div>Carregando planilha da guild...</div>;
+  return (
+    <div style={{ marginBottom: 40 }}>
+      <h2>Planilha da Guild</h2>
+      <table border="1" cellPadding="5" style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr>
+            {Object.keys(planilha[0]).map((key) => (
+              <th key={key} style={{ background: '#eee' }}>{key}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {planilha.map((row, index) => (
+            <tr key={index}>
+              {Object.values(row).map((value, i) => (
+                <td key={i}>{value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+function CharBazaarElysian() {
+  const [chars, setChars] = useState([]);
+  useEffect(() => {
+    fetch('https://rubinot-tools.vercel.app/api/charbazaar?world=Elysian')
+      .then(res => res.json())
+      .then(json => {
+        // Filtra os mais baratos da semana
+        const sorted = json.sort((a, b) => a.price - b.price);
+        setChars(sorted.slice(0, 10));
+      })
+      .catch(err => setChars([]));
+  }, []);
+  if (!chars.length) return <div>Carregando Char Bazaar Elysian...</div>;
+  return (
+    <div style={{ marginBottom: 40 }}>
+      <h2>Char Bazaar - Elysian (Mais baratos da semana)</h2>
+      <table border="1" cellPadding="5" style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Level</th>
+            <th>Vocação</th>
+            <th>Preço</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chars.map((char, idx) => (
+            <tr key={idx}>
+              <td>{char.name}</td>
+              <td>{char.level}</td>
+              <td>{char.vocation}</td>
+              <td>{char.price}</td>
+              <td><a href={char.url} target="_blank" rel="noopener noreferrer">Ver</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+    <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
+      <h1 style={{ textAlign: 'center', marginBottom: 32 }}>Tibianofear Guild & Char Bazaar Elysian</h1>
+      <CharBazaarElysian />
+      <PlanilhaGuild />
+      <footer style={{ textAlign: 'center', marginTop: 40, color: '#888' }}>
+        Powered by Rubinot Tools & Google Sheets
       </footer>
+    </div>
+  );
+}
+import { useEffect, useState } from 'react';
+
+export default function Home() {
+  const [planilha, setPlanilha] = useState('');
+
+  useEffect(() => {
+    fetch('/api/planilha')
+      .then(res => res.json())
+      .then(json => setPlanilha(json.data));
+  }, []);
+
+  return (
+    <div>
+      <h1>Dados da Planilha</h1>
+      <pre>{planilha}</pre>
+    </div>
+  );
+}
+import { useEffect, useState } from 'react';
+
+export default function Home() {
+  const [planilha, setPlanilha] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/planilha')
+      .then(res => res.json())
+      .then(json => setPlanilha(json))
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>Planilha Google</h1>
+      <table border="1" cellPadding="5" style={{ marginBottom: '40px', width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          {planilha[0] && (
+            <tr>
+              {Object.keys(planilha[0]).map((key) => (
+                <th key={key} style={{ background: '#eee' }}>{key}</th>
+              ))}
+            </tr>
+          )}
+        </thead>
+        <tbody>
+          {planilha.map((row, index) => (
+            <tr key={index}>
+              {Object.values(row).map((value, i) => (
+                <td key={i}>{value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h1>Site Rubinot</h1>
+      <div style={{ width: '100%', height: '800px' }}>
+        <iframe 
+          src="https://rubinot.com.br" 
+          width="100%" 
+          height="100%" 
+          style={{ border: 'none' }}
+          title="Rubinot"
+        ></iframe>
+      </div>
     </div>
   );
 }
