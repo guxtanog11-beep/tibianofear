@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 
 function PlanilhaGuild() {
@@ -85,73 +86,6 @@ export default function Home() {
       <footer style={{ textAlign: 'center', marginTop: 40, color: '#888' }}>
         Powered by Rubinot Tools & Google Sheets
       </footer>
-    </div>
-  );
-}
-import { useEffect, useState } from 'react';
-
-export default function Home() {
-  const [planilha, setPlanilha] = useState('');
-
-  useEffect(() => {
-    fetch('/api/planilha')
-      .then(res => res.json())
-      .then(json => setPlanilha(json.data));
-  }, []);
-
-  return (
-    <div>
-      <h1>Dados da Planilha</h1>
-      <pre>{planilha}</pre>
-    </div>
-  );
-}
-import { useEffect, useState } from 'react';
-
-export default function Home() {
-  const [planilha, setPlanilha] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/planilha')
-      .then(res => res.json())
-      .then(json => setPlanilha(json))
-      .catch(err => console.error(err));
-  }, []);
-
-  return (
-    <div style={{ padding: '20px' }}>
-      <h1>Planilha Google</h1>
-      <table border="1" cellPadding="5" style={{ marginBottom: '40px', width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          {planilha[0] && (
-            <tr>
-              {Object.keys(planilha[0]).map((key) => (
-                <th key={key} style={{ background: '#eee' }}>{key}</th>
-              ))}
-            </tr>
-          )}
-        </thead>
-        <tbody>
-          {planilha.map((row, index) => (
-            <tr key={index}>
-              {Object.values(row).map((value, i) => (
-                <td key={i}>{value}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h1>Site Rubinot</h1>
-      <div style={{ width: '100%', height: '800px' }}>
-        <iframe 
-          src="https://rubinot.com.br" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 'none' }}
-          title="Rubinot"
-        ></iframe>
-      </div>
     </div>
   );
 }
