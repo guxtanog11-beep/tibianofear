@@ -50,7 +50,6 @@ function PartyshareGuild({ planilha }) {
 }
 
 
-import { useEffect, useState } from 'react';
 
 function PlanilhaGuild({ setPlanilha, planilha }) {
   useEffect(() => {
