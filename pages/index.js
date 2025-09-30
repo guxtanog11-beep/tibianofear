@@ -130,32 +130,63 @@ function CharBazaarElysian() {
   );
 }
 
+import Head from "next/head"
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white flex flex-col items-center p-6">
-      <h1 className="text-3xl font-bold mb-6 text-pink-500 drop-shadow-lg">
-        Tibianofear Guild & Char Bazaar Elysian
-      </h1>
-      <div className="grid md:grid-cols-2 gap-8 w-full max-w-6xl">
+    <div className="min-h-screen bg-[url('https://www.tibia.com/images/global/header/background-artwork.jpg')] bg-cover bg-center text-yellow-200 flex flex-col items-center p-6">
+      <Head>
+        {/* Fonte medieval */}
+        <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+      </Head>
+
+      {/* Cabeçalho */}
+      <header className="text-center mb-10">
+        <h1 
+          className="text-5xl md:text-6xl drop-shadow-2xl"
+          style={{ fontFamily: "'UnifrakturCook', cursive", color: "#FFD700" }}
+        >
+          Tibianofear Guild
+        </h1>
+        <p className="mt-3 text-lg text-red-200 italic">
+          Char Bazaar Elysian & Guild Tools
+        </p>
+      </header>
+
+      {/* Conteúdo principal */}
+      <main className="grid md:grid-cols-2 gap-8 w-full max-w-6xl">
         {/* Rubinot */}
-        <div className="bg-gray-800 rounded-2xl shadow-xl p-4">
-          <h2 className="text-xl font-semibold mb-2">Char Bazaar (Rubinot)</h2>
+        <div className="bg-black/70 border-4 border-red-800 rounded-xl shadow-2xl p-4">
+          <h2 
+            className="text-2xl mb-4"
+            style={{ fontFamily: "'UnifrakturCook', cursive", color: "#FFD700" }}
+          >
+            Char Bazaar (Rubinot)
+          </h2>
           <iframe 
             src="https://rubinot.com.br"
-            className="w-full h-[600px] rounded-lg"
+            className="w-full h-[600px] rounded-lg border border-yellow-600"
           />
         </div>
+
         {/* Planilha */}
-        <div className="bg-gray-800 rounded-2xl shadow-xl p-4">
-          <h2 className="text-xl font-semibold mb-2">Planilha da Guild</h2>
+        <div className="bg-black/70 border-4 border-red-800 rounded-xl shadow-2xl p-4">
+          <h2 
+            className="text-2xl mb-4"
+            style={{ fontFamily: "'UnifrakturCook', cursive", color: "#FFD700" }}
+          >
+            Planilha da Guild
+          </h2>
           <iframe 
-            src="LINK_DA_SUA_PLANILHA"
-            className="w-full h-[600px] rounded-lg"
+            src="LINK_DA_SUA_PLANILHA_PUBLICA"
+            className="w-full h-[600px] rounded-lg border border-yellow-600"
           />
         </div>
-      </div>
-      <footer className="mt-10 text-sm text-gray-400">
-        Powered by Rubinot Tools & Google Sheets
+      </main>
+
+      {/* Rodapé */}
+      <footer className="mt-12 text-sm text-yellow-400">
+        Feito para <span className="text-red-500 font-bold">Tibianofear Guild</span> ⚔️ | Powered by Rubinot Tools & Google Sheets
       </footer>
     </div>
   )
